@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="display">
+        <input id="screen" type="text " placeholder="0" />
+      </div>
+
+      <div class="btns">
+        <div class="row">
+          <button id="ce" onclick="backspc()">CE</button>
+          <button onclick="fact()">x!</button>
+          <button class="btn">(</button>
+          <button class="btn">)</button>
+          <button class="btn">%</button>
+          <button id="ac" onclick="screen.value=''">AC</button>
+        </div>
+        <div class="row">
+          <button onclick=" sin()">sin</button>
+          <button onclick="pi()">π</button>
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button class="btn">÷</button>
+        </div>
+        <div class="row">
+          <button onclick="cos()">cos</button>
+          <button onclick="log()">log</button>
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+          <button class="btn">x</button>
+        </div>
+        <div class="row">
+          <button onclick="tan()">tan</button>
+          <button onclick="sqrt()">√</button>
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button class="btn">-</button>
+        </div>
+        <div class="row">
+          <button onclick="e()">e</button>
+          <button onclick="pow()">
+            x<span style="position: relative; bottom: 0.4em; right: 0.1em" ;
+              >y</span
+            >
+          </button>
+          <button class="btn">0</button>
+          <button class="btn">.</button>
+          <button id="eval" onclick="calculate()">=</button>
+          <button class="btn">+</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var screen = document.querySelector("#screen");
+    var btn = document.querySelectorAll(".btn");
+
+    for (item of btn) {
+      item.addEventListener("click", (e) => {
+        btntext = e.target.innerText;
+        if (btntext == "x") {
+          btntext = "*";
+        }
+
+        if (btntext == "÷") {
+          btntext = "/";
+        }
+        screen.value += btntext;
+      });
+    }
+
+    // Calculates the sine of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+    function sin() {
+      screen.value = Math.sin(screen.value);
+    }
+
+    // Calculates the cosine of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+    function cos() {
+      screen.value = Math.cos(screen.value);
+    }
+
+    // Calculates the tangent of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    function tan() {
+      screen.value = Math.tan(screen.value);
+    }
+
+    // Calculates the power of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    function pow() {
+      screen.value = Math.pow(screen.value, 2);
+    }
+
+    // Calculates the square root of the value displayed on the screen.
+
+    // Parameters:
+    //     None
+
+    // Returns:
+    //     None
+    function sqrt() {
+      screen.value = Math.sqrt(screen.value, 2);
+    }
+
+    // Calculates the log of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    function log() {
+      screen.value = Math.log(screen.value);
+    }
+
+    // Calculates pi and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    function pi() {
+      screen.value = 3.14159265359;
+    }
+
+    // calculates e and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    // Sets the value of the screen to the mathematical constant e (approximately 2.71828182846).
+    function e() {
+      screen.value = 2.71828182846;
+    }
+
+    // calculates the factorial of the value displayed on the screen and updates the screen with the result.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    // Calculates the factorial of a given number.
+
+    // This function takes no parameters.
+
+    // Returns the factorial of the input number.
+    function fact() {
+      var i, num, f;
+      f = 1;
+      num = screen.value;
+      for (i = 1; i <= num; i++) {
+        f = f * i;
+      }
+      i = i - 1;
+      screen.value = f;
+    }
+
+    // clears the screen.
+
+    // Parameters:
+    // None
+
+    // Return:
+    // None
+
+    // Deletes the last character in the screen value.
+    function backspc() {
+      screen.value = screen.value.substr(0, screen.value.length - 1);
+    }
+
+    // Evaluates the value displayed on the screen.
+
+    // Calculate the value of the screen based on the input value.
+    //
+    // Parameters:
+    //   None
+    //
+    // Returns:
+    //   None
+    function calculate() {
+      var splitscreen = screen.value.split("%", 2);
+
+      if (splitscreen.length > 1) {
+        screen.value = eval(splitscreen[0] + "/100*" + splitscreen[1]);
+      } else {
+        screen.value = eval(screen.value);
+      }
+    }
+  </script>
+</html>
